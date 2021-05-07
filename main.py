@@ -1,5 +1,11 @@
 from tkinter import *
 root = Tk()
-label1= Label(root,text="Tesztxd")
+root.geometry("1280x720")
+root.title("Python game")
+label1= Label(root,text="Python game")
 label1.pack(side=TOP,expand=True)
+label2= Label(root,text="Nem találtunk mentett fájlt.", fg="blue")
+label2.pack(side=TOP,expand=True)
+button1 = Button(root,text="Kilépés", fg="green", command=root.destroy)
+button1.pack(side=LEFT, expand=TRUE)
 root.mainloop()
