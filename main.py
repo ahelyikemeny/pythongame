@@ -2,6 +2,7 @@ from tkinter import *
 root = Tk()
 root.geometry("1280x720")
 root.title("Python game")
+root.configure(bg="black")
 label1= Label(root,text="Python game")
 label1.pack(side=TOP,expand=True)
 label2= Label(root,text="Nem találtunk mentett fájlt.", fg="blue")
