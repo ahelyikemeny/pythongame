@@ -10,10 +10,9 @@ class StarActor(MyActor):
     def __init__(self):
         r = Random()
         self.__speed = (r.random() - 0.5) * 50
-        super().__init__('star.png', (r.randint(0, 600), r.randint(0, 600)))
-        # self.setsize(20, 20)
+        super().__init__('szeker.png', (r.randint(0, 600), r.randint(0, 600)))
         self.set_on_mouse_down_listener(self.click)
 
-    def update(self, deltaTime: float = 0.0166666666666666666666):
-        super().update(deltaTime)
-        self.rotate_with(self.__speed * deltaTime)
+    #def update(self, deltaTime: float = 0.0166666666666666666666):
+        #super().update(deltaTime)
+        #self.rotate_with(self.__speed * deltaTime)

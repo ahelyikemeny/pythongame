@@ -9,12 +9,14 @@ import pgzrun
 from n_mygameworld import *
 from n_staractor import StarActor
 
+WIDTH = 1920
+HEIGHT = 1080
+
 # Globális eseménykezelő, csak egy ilyen lehet a programban. A kattintás eseményt kezeli, a pos változó a kattintás helye, a button pedig a gomb értéke, amelyikkel kattinttunk
 # Fontos, hogy ez a függvény ezzel a névvel és paraméterlistával jöjjön létre.
 def on_mouse_down(pos, button):
     # Az esemény értékeit elküldi a Stage számára, az mejd továbbküldi az Actoroknak
     gamestage.on_mouse_down(pos, button)
-
 
 # Globális eseménykezelő, csak egy ilyen lehet a programban. A kattintás eseményt kezeli, a pos változó a kattintás helye, a button pedig a gomb értéke
 # Fontos, hogy ez a függvény ezzel a névvel és paraméterlistával jöjjön létre.
