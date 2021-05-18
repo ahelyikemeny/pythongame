@@ -91,3 +91,4 @@ gamestage.add_actor(m3)
 
 # Ezzel indul a játék. Összeszedi a fent fix névvel definiált eseménykezelőket, létrehozza az ablakot, stb...
 pgzrun.go()
+
