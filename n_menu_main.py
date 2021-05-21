@@ -2,6 +2,9 @@ from n_mygameworld import *
 from n_menu_menustage import *
 from n_menu_gamestage import *
 
+WIDTH = 1360
+HEIGHT = 768
+
 
 def on_key_down(key, mod, unicode):
     menu.on_key_down(key, mod, unicode)
