@@ -11,8 +11,10 @@ class MyActor(Actor):
     _on_mouse_down_listener = 0
     _on_mouse_up_listener = 0
     _on_mouse_move_listener = 0
-    _width: int = -1
-    _height: int = -1
+    _on_key_up_listener = 0
+    _on_key_down_listener = 0
+    _w: int = -1
+    _h: int = -1
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
         self.elapsed_time += deltaTime
@@ -62,13 +64,39 @@ class MyActor(Actor):
     def remove_on_mouse_move_listener(self):
         self._on_mouse_move_listener = 0
 
+    def on_key_down(self, key, mod, unicode):
+        if self._on_key_down_listener != 0:
+            self._on_key_down_listener(key, mod, unicode)
+
+    def on_key_up(self, key, mod):
+        if self._on_key_up_listener != 0:
+            self._on_key_up_listener(key, mod)
+
+    def set_on_key_down_listener(self, func):
+        self._on_key_down_listener = func
+
+    def set_on_key_up_listener(self, func):
+        self._on_key_up_listener = func
+
+    def remove_on_key_down_listener(self):
+        self._on_key_down_listener = 0
+
+    def remove_on_key_up_listener(self):
+        self._on_key_up_listener = 0
+
+    def set_image(self, image_url:str):
+        self.image = image_url
+
     def set_size(self, width: int, height: int):
-        if self._width == -1 or self._height == -1:
-            self._surf = pygame.transform.scale(self._surf, (self.width, self.height))
+        if width == -1 and height == -1:
+            if self._w == -1 and self._h == -1:
+                self._surf = pygame.transform.scale(self._surf, (self.width, self.height))
+            else:
+                self._surf = pygame.transform.scale(self._surf, (self._w, self._h))
         else:
             self._surf = pygame.transform.scale(self._surf, (width, height))
-        self._width = width
-        self._height = height
+            self._w = width
+            self._h = height
         self._update_pos()
 
     def set_stage(self, stage: 'MyStage'):
@@ -76,7 +104,7 @@ class MyActor(Actor):
 
     def set_rotation(self, degree: int):
         self.angle = degree
-        self.set_size(self._width, self._height)
+        self.set_size(-1, -1)
 
     def rotate_with(self, degree: int):
         self.set_rotation(self.angle + degree)
@@ -89,21 +117,21 @@ class MyActor(Actor):
 
     def set_width(self, width: int, aspect_ratio: bool = True):
         if aspect_ratio:
-            self.set_size(width, int(float(self._height) * (float(width) / float(self._width))))
+            self.set_size(width, int(float(self._h) * (float(width) / float(self._w))))
         else:
-            self.set_size(width, self._height)
+            self.set_size(width, self._h)
 
     def set_height(self, height: int, aspect_ratio: bool = True):
         if aspect_ratio:
-            self.set_size(int(float(self._width) * (float(height) / float(self._height))), height)
+            self.set_size(int(float(self._w) * (float(height) / float(self._h))), height)
         else:
-            self.set_size(self._width, height)
+            self.set_size(self._w, height)
 
     def get_width(self)->int:
-        return self._width
+        return self._w
 
     def get_height(self)->int:
-        return self._height
+        return self._h
 
 class MyStage:
     actors: List[MyActor]
@@ -111,6 +139,8 @@ class MyStage:
     _on_mouse_down_listener = 0
     _on_mouse_up_listener = 0
     _on_mouse_move_listener = 0
+    _on_key_up_listener = 0
+    _on_key_down_listener = 0
 
     def __init__(self):
         self.actors = []
@@ -151,6 +181,30 @@ class MyStage:
             self._on_mouse_move_listener(pos)
         for obj in self.actors:
             obj.on_mouse_move(pos)
+
+    def on_key_down(self, key, mod, unicode):
+        if self._on_key_down_listener != 0:
+            self._on_key_down_listener(key, mod, unicode)
+        for obj in self.actors:
+            obj.on_key_down(key, mod, unicode)
+
+    def on_key_up(self, key, mod):
+        if self._on_key_up_listener != 0:
+            self._on_key_up_listener(key, mod)
+        for obj in self.actors:
+            obj.on_key_up(key, mod)
+
+    def set_on_key_down_listener(self, func):
+        self._on_key_down_listener = func
+
+    def set_on_key_up_listener(self, func):
+        self._on_key_up_listener = func
+
+    def remove_on_key_down_listener(self):
+        self._on_key_down_listener = 0
+
+    def remove_on_key_up_listener(self):
+        self._on_key_up_listener = 0
 
     def remove_on_mouse_down_listener(self):
         self._on_mouse_down_listener = 0
