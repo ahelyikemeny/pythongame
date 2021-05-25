@@ -1,9 +1,7 @@
 
-
 from n_mygameworld import *
 from n_menu_menustage import *
 class BlankStage(MyStage):
-    background = pygame.image.load("images\\auto.png")
     def back(self, pos, btn):
         self.menu.menu_Main()
 
@@ -13,18 +11,25 @@ class BlankStage(MyStage):
             self.menu.menu_Main()
         if key == keys.UP:
             if self.m.y == 504:
-                animate(self.m, pos=(300,240))
+                animate(self.m, pos=(self.m.x,240), duration=(0.2))
             if self.m.y == 240:
-                animate(self.m, pos=(300, -24))
+                animate(self.m, pos=(self.m.x, -24), duration=(0.2))
         if key == keys.DOWN:
             if self.m.y == 240:
-                animate(self.m, pos=(300, 504))
+                animate(self.m, pos=(self.m.x, 504), duration=(0.2))
             if self.m.y == -24:
-                animate(self.m, pos=(300, 240))
+                animate(self.m, pos=(self.m.x, 240), duration=(0.2))
+
+    def update(self, deltaTime: float = 0.0166666666666666666666):
+        super().update(deltaTime)
+        self.m.x = self.m.x + 1
+        self.hit()
 
     def hit(self):
-        if self.m2.pos == self.m.pos:
+        if self.m2.overlaps_with(self.m):
             self.m.remove_from_stage()
+            print(self.m2)
+
 
     def __init__(self, menu: 'Menustage'):
         super().__init__()
@@ -36,6 +41,6 @@ class BlankStage(MyStage):
         self.add_actor(self.m2)
         self.m2.set_height(200)
         self.m2.set_width(300)
-        self.hit()
         self.menu = menu
+        speedMainCar : float = 0.1
         self.set_on_key_down_listener(self.keydown)
