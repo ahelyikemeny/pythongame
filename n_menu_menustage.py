@@ -8,7 +8,7 @@ class Menustage(MyStage):
     def menu_Main(self, pos=0, btn=0):
         self.onscreenstage = self
 
-    def menu_Game(self, pos=0, btn=0):
+    def menu_Creator(self, pos=0, btn=0):
         self.onscreenstage = GameStage(self)
 
     def menu_Blank(self, pos=0, btn=0):
@@ -19,18 +19,21 @@ class Menustage(MyStage):
 
     def __init__(self):
         super().__init__()
-        menuitem1: MyActor = MyActor("star.png", pos=(100, 100), anchor=(0, 0))
-        self.add_actor(menuitem1)
-        menuitem1.set_on_mouse_down_listener(self.menu_Game)
 
-        menuitem2: MyActor = MyActor("star.png", pos=(100, 250), anchor=(0, 0))
+        menuitem2: MyActor = MyActor("button.png", pos=(500, 150), anchor=(0, 0))
+        menuitem2.set_size(400, 180)
         self.add_actor(menuitem2)
-        menuitem2.set_on_mouse_down_listener(self.menu_Exit)
+        menuitem2.set_on_mouse_down_listener(self.menu_Blank)
 
-        menuitem3: MyActor = MyActor("star.png", pos=(300, 250), anchor=(0, 0))
+        menuitem3: MyActor = MyActor("button.png", pos=(500, 350), anchor=(0, 0))
+        menuitem3.set_size(400, 180)
         self.add_actor(menuitem3)
-        menuitem3.set_on_mouse_down_listener(self.menu_Blank)
+        menuitem3.set_on_mouse_down_listener(self.menu_Creator)
 
+        menuitem4: MyActor = MyActor("button.png", pos=(500, 550), anchor=(0, 0))
+        menuitem4.set_size(400, 180)
+        self.add_actor(menuitem4)
+        menuitem4.set_on_mouse_down_listener(self.menu_Exit)
 
         self.onscreenstage : MyStage = self
 
