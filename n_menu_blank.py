@@ -26,7 +26,7 @@ class BlankStage(MyStage):
     def __init__(self, menu: 'Menustage'):
         super().__init__()
         #screen.blit("background",(0,0))
-        self.m: MyActor = MyActor("car.png", pos=(300, 504), anchor=(0, 0))
+        self.m: MyActor = MyActor("auto.png", pos=(300, 504), anchor=(0, 0))
         self.m.set_on_mouse_down_listener(self.back)
         self.add_actor(self.m)
         self.menu = menu
