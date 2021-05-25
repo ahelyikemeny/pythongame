@@ -22,6 +22,9 @@ class BlankStage(MyStage):
             if self.m.y == -24:
                 animate(self.m, pos=(300, 240))
 
+    def hit(self):
+        if self.m2.pos == self.m.pos:
+            self.m.remove_from_stage()
 
     def __init__(self, menu: 'Menustage'):
         super().__init__()
@@ -29,5 +32,10 @@ class BlankStage(MyStage):
         self.m: MyActor = MyActor("auto.png", pos=(300, 504), anchor=(0, 0))
         self.m.set_on_mouse_down_listener(self.back)
         self.add_actor(self.m)
+        self.m2: MyActor = MyActor("rock.png", pos=(300, 100), anchor=(0, 0))
+        self.add_actor(self.m2)
+        self.m2.set_height(200)
+        self.m2.set_width(300)
+        self.hit()
         self.menu = menu
         self.set_on_key_down_listener(self.keydown)
