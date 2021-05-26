@@ -5,8 +5,7 @@ class StarActor(MyActor):
     __speed: float
 
     def click(self, pos, btn):
-
-
+        pass
 
     def __init__(self):
         r = Random()

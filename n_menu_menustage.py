@@ -20,21 +20,24 @@ class Menustage(MyStage):
     def __init__(self):
         super().__init__()
 
-        menuitem2: MyActor = MyActor("button.png", pos=(500, 150), anchor=(0, 0))
-        menuitem2.set_size(400, 180)
+        menuitem2: MyActor = MyActor("playb.png", pos=(500, 150), anchor=(0, 0))
+        menuitem2.set_size(414, 150)
         self.add_actor(menuitem2)
         menuitem2.set_on_mouse_down_listener(self.menu_Blank)
 
-        menuitem3: MyActor = MyActor("button.png", pos=(500, 350), anchor=(0, 0))
-        menuitem3.set_size(400, 180)
+        menuitem3: MyActor = MyActor("goldc.png", pos=(500, 350), anchor=(0, 0))
+        menuitem3.set_size(414, 150)
         self.add_actor(menuitem3)
         menuitem3.set_on_mouse_down_listener(self.menu_Creator)
 
-        menuitem4: MyActor = MyActor("button.png", pos=(500, 550), anchor=(0, 0))
-        menuitem4.set_size(400, 180)
+        menuitem4: MyActor = MyActor("goldx.png", pos=(500, 550), anchor=(0, 0))
+        menuitem4.set_size(414, 150)
         self.add_actor(menuitem4)
         menuitem4.set_on_mouse_down_listener(self.menu_Exit)
 
+        text1: MyLabel = MyLabel()
+        text1.set_x(140)
+        self.add_actor(text1)
         self.onscreenstage : MyStage = self
 
     def draw(self):
