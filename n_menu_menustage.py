@@ -64,5 +64,10 @@ class Menustage(MyStage):
         else:
             self.onscreenstage.on_key_down(key, mod, unicode)
 
+    def on_key_up(self, key, mod):
+        if self == self.onscreenstage:
+            super().on_key_up(key, mod)
+        else:
+            self.onscreenstage.on_key_up(key, mod)
 
 
