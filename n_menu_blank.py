@@ -34,9 +34,10 @@ class BlankStage(MyStage):
     def __init__(self, menu: 'Menustage'):
         super().__init__()
         #screen.blit("background",(0,0))
-        self.m: MyActor = MyActor("auto.png", pos=(300, 504), anchor=(0, 0))
-        self.m.set_on_mouse_down_listener(self.back)
+        self.m: MyActor = MyActor("kancsi.png", pos=(300, 504), anchor=(0, 0))
         self.add_actor(self.m)
+        self.m.set_width(100)
+        self.zsuppán: MyActor = MyActor("auto.png", pos=(300, 504), anchor=(0, 0))
         self.m2: MyActor = MyActor("rock.png", pos=(300, 100), anchor=(0, 0))
         self.add_actor(self.m2)
         self.m2.set_height(200)
