@@ -29,7 +29,7 @@ class BlankStage(MyStage):
         if self.m2.overlaps_with(self.m):
             self.m.remove_from_stage()
             print(self.m2)
-
+###
 
     def __init__(self, menu: 'Menustage'):
         super().__init__()
