@@ -22,7 +22,7 @@ class BlankStage(MyStage):
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
         super().update(deltaTime)
-        self.m.x = self.m.x + 1
+        self.m2.x = self.m2.x + 5
         self.hit()
 
     def hit(self):
