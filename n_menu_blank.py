@@ -1,4 +1,4 @@
-
+from time import *
 from n_mygameworld import *
 from n_menu_menustage import *
 class BlankStage(MyStage):
@@ -9,30 +9,39 @@ class BlankStage(MyStage):
         print(key)
         if key == keys.ESCAPE:
             self.menu.menu_Main()
-        if key == keys.UP:
-            if self.m.y == 504:
-                animate(self.m, pos=(self.m.x,240), duration=(0.2))
-            if self.m.y == 240:
-                animate(self.m, pos=(self.m.x, -24), duration=(0.2))
-        if key == keys.DOWN:
-            if self.m.y == 240:
-                animate(self.m, pos=(self.m.x, 504), duration=(0.2))
-            if self.m.y == -24:
-                animate(self.m, pos=(self.m.x, 240), duration=(0.2))
+        if key == keys.SPACE:
+            if self.isJumped == False:
+                self.m.y = self.m.y - 100
+                self.isJumped = True
+                print(self.m.y)
+
+
+
+    def keyup(self, key, mod):
+        print("UPP")
+        if key == keys.SPACE:
+            if self.isJumped == True:
+                animate(self.m, pos=(self.m.x, 504), duration=(0.3))
+                print(self.m.y)
+                self.isJumped = False
+
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
         super().update(deltaTime)
         self.m2.x = self.m2.x + 5
         self.hit()
+        print(self.isJumped)
 
     def hit(self):
         if self.m2.overlaps_with(self.m):
             self.m.remove_from_stage()
-            print(self.m2)
-###
+            print(self.m)
+
+
 
     def __init__(self, menu: 'Menustage'):
         super().__init__()
+        self.isJumped: bool = False
         #screen.blit("background",(0,0))
         self.background: MyActor = MyActor(("background.png"), pos=(0,0), anchor=(0,0))
         self.add_actor(self.background)
@@ -48,3 +57,4 @@ class BlankStage(MyStage):
         self.menu = menu
         speedMainCar : float = 0.1
         self.set_on_key_down_listener(self.keydown)
+        self.set_on_key_up_listener(self.keyup)
