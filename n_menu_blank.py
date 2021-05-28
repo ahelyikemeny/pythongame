@@ -23,7 +23,7 @@ class BlankStage(MyStage):
         print("UPP")
         if key == keys.SPACE:
             if self.isJumped == True:
-                animate(self.m, pos=(self.m.x, 504), duration=(1))
+                animate(self.m, pos=(self.m.x, 550), duration=(1))
                 print(self.m.y)
                 self.isJumped = False
 
@@ -31,31 +31,23 @@ class BlankStage(MyStage):
     def update(self, deltaTime: float = 0.0166666666666666666666):
         super().update(deltaTime)
         self.m2.x = self.m2.x + 5
-        self.hit()
         self.resetrock()
         self.zsuppanauto()
-        print(self.hp)
+        self.onrockHit()
 
-    def hit(self):
-        if self.m.is_on_stage() == True:
-            if self.m2.overlaps_with(self.m):
-                self.hp = self.hp - 0.103448275862069
-                if self.hp <= 0:
-                    self.hp = 0
-                    self.m.remove_from_stage()
-                    self.lose()
 
     def resetrock(self):
         if self.m2.x == 1500:
             self.m2.set_x(0)
 
     def lose(self):
+            self.m.remove_from_stage()
             self.add_actor(self.m4)
 
 
     def zsuppanauto(self):
         if self.isJumpedZsuppan == False:
-            if self.zsuppan.x - self.m2.x == 30:
+            if self.zsuppan.x - self.m2.x == 50:
                 self.zsuppan.set_y(self.zsuppan.y - 200)
                 self.isJumpedZsuppan = True
                 #print(self.zsuppan.x)
@@ -64,6 +56,20 @@ class BlankStage(MyStage):
         if self.isJumpedZsuppan == True:
             animate(self.zsuppan, pos=(self.zsuppan.x, self.zsuppan.y + 200), duration=1)
             self.isJumpedZsuppan = False
+
+    def onrockHit(self):
+        print(self.hp)
+        print(self.m.y)
+        print(self.m2.y)
+        if self.m.is_on_stage():
+            if self.m2.is_on_stage():
+                if self.m.y ==   self.m2.y - 50:
+                    if self.hp > 0:
+                        if self.m.x - 50  == self.m2.x:
+                            self.hp = self.hp - 1
+                            if self.hp == 0:
+                                self.hp = 0
+                                self.lose()
 
 
 
@@ -76,13 +82,13 @@ class BlankStage(MyStage):
         self.background: MyActor = MyActor(("background.png"), pos=(0,0), anchor=(0,0))
         self.add_actor(self.background)
         self.background.set_size(1360,768)
-        self.m: MyActor = MyActor("kancsibase.png", pos=(300, 504), anchor=(0, 0))
+        self.m: MyActor = MyActor("kancsibase.png", pos=(300, 550), anchor=(0, 0))
         self.add_actor(self.m)
         self.m.set_width(100)
-        self.zsuppan: MyActor = MyActor("zsuppanbase.png", pos=(600, 504), anchor=(0, 0))
+        self.zsuppan: MyActor = MyActor("zsuppanbase.png", pos=(600, 550), anchor=(0, 0))
         self.add_actor(self.zsuppan)
         self.zsuppan.set_width(100)
-        self.m2: MyActor = MyActor("rock.png", pos=(0, 550), anchor=(0, 0))
+        self.m2: MyActor = MyActor("rock.png", pos=(0, 600), anchor=(0, 0))
         self.add_actor(self.m2)
         self.m2.set_height(200)
         self.m2.set_width(300)
