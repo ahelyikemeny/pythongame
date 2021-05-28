@@ -12,7 +12,7 @@ class BlankStage(MyStage):
             self.menu.menu_Main()
         if key == keys.SPACE:
             if self.isJumped == False:
-                self.m.y = self.m.y - 100
+                self.m.y = self.m.y - 200
                 self.isJumped = True
                 self.m.add_timer(timer=self.timer)
                 print(self.m.y)
@@ -23,37 +23,47 @@ class BlankStage(MyStage):
         print("UPP")
         if key == keys.SPACE:
             if self.isJumped == True:
-                animate(self.m, pos=(self.m.x, 504), duration=(0.3))
+                animate(self.m, pos=(self.m.x, 504), duration=(1))
                 print(self.m.y)
                 self.isJumped = False
 
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
         super().update(deltaTime)
-        self.m2.x = self.m2.x + Random().randint(a=0, b=10)
+        self.m2.x = self.m2.x + 5
         self.hit()
-        print(self.isJumped)
         self.resetrock()
-        self.lose()
+        self.zsuppanauto()
+        print(self.hp)
 
     def hit(self):
         if self.m.is_on_stage() == True:
             if self.m2.overlaps_with(self.m):
-                self.m.remove_from_stage()
-                print(self.m)
+                self.hp = self.hp - 0.103448275862069
+                if self.hp <= 0:
+                    self.hp = 0
+                    self.m.remove_from_stage()
+                    self.lose()
 
     def resetrock(self):
         if self.m2.x == 1500:
             self.m2.set_x(0)
 
     def lose(self):
-        if self.m.is_on_stage() == False:
             self.add_actor(self.m4)
-    def zsuppanjump(self):
-        self.zsuppan.set_y(self.zsuppan.y - 20)
 
-    def zsuppanback(self):
-        self.zsuppan.set_y(self.zsuppan.y + 20)
+
+    def zsuppanauto(self):
+        if self.isJumpedZsuppan == False:
+            if self.zsuppan.x - self.m2.x == 30:
+                self.zsuppan.set_y(self.zsuppan.y - 200)
+                self.isJumpedZsuppan = True
+                #print(self.zsuppan.x)
+                #print(self.m2.x)
+                print(self.zsuppan.x - self.m2.x)
+        if self.isJumpedZsuppan == True:
+            animate(self.zsuppan, pos=(self.zsuppan.x, self.zsuppan.y + 200), duration=1)
+            self.isJumpedZsuppan = False
 
 
 
@@ -61,6 +71,7 @@ class BlankStage(MyStage):
         super().__init__()
         self.isJumped: bool = False
         self.isJumpedZsuppan : bool = False
+        self.hp : int = 3
         #screen.blit("background",(0,0))
         self.background: MyActor = MyActor(("background.png"), pos=(0,0), anchor=(0,0))
         self.add_actor(self.background)
