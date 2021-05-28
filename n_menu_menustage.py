@@ -40,17 +40,20 @@ class Menustage(MyStage):
         self.add_actor(text1)
         self.onscreenstage : MyStage = self
 
+    def tikk(self, timer):
+        print("TIKK")
+
     def draw(self):
         if self == self.onscreenstage:
             super(Menustage, self).draw()
         else:
             self.onscreenstage.draw()
 
-    def update(self, deltaTime: float = 0.0166666666666666666666):
+    def update(self, delta_time: float = 0.0166666666666666666666):
         if self == self.onscreenstage:
-            super(Menustage, self).update(deltaTime)
+            super(Menustage, self).update(delta_time)
         else:
-            self.onscreenstage.update(deltaTime)
+            self.onscreenstage.update(delta_time)
 
     def on_mouse_down(self, pos, button):
         if self == self.onscreenstage:

@@ -6,6 +6,9 @@ class StarActor(MyActor):
 
     def click(self, pos, btn):
         pass
+        #self.remove_from_stage()
+        #self.set_size(20, 20)
+        #self.set_image("m_jerry.gif")
 
     def __init__(self):
         r = Random()
@@ -14,9 +17,9 @@ class StarActor(MyActor):
         # self.setsize(20, 20)
         self.set_on_mouse_down_listener(self.click)
 
-    def update(self, deltaTime: float = 0.0166666666666666666666):
-        super().update(deltaTime)
-        self.rotate_with(self.__speed * deltaTime)
+    def update(self, delta_time: float = 0.0166666666666666666666):
+        super().update(delta_time)
+        self.rotate_with(self.__speed * delta_time)
 
 
 

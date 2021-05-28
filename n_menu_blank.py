@@ -1,5 +1,6 @@
 from time import *
 from n_mygameworld import *
+from random import Random
 from n_menu_menustage import *
 class BlankStage(MyStage):
     def back(self, pos, btn):
@@ -13,6 +14,7 @@ class BlankStage(MyStage):
             if self.isJumped == False:
                 self.m.y = self.m.y - 100
                 self.isJumped = True
+                self.m.add_timer(timer=self.timer)
                 print(self.m.y)
 
 
@@ -28,28 +30,37 @@ class BlankStage(MyStage):
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
         super().update(deltaTime)
-        self.m2.x = self.m2.x + 5
+        self.m2.x = self.m2.x + Random().randint(a=0, b=10)
         self.hit()
         print(self.isJumped)
         self.resetrock()
+        self.lose()
 
     def hit(self):
-        if self.m2.overlaps_with(self.m):
-            self.m.remove_from_stage()
-            print(self.m)
+        if self.m.is_on_stage() == True:
+            if self.m2.overlaps_with(self.m):
+                self.m.remove_from_stage()
+                print(self.m)
 
     def resetrock(self):
         if self.m2.x == 1500:
             self.m2.set_x(0)
 
     def lose(self):
-        if self.m.remove_from_stage():
+        if self.m.is_on_stage() == False:
             self.add_actor(self.m4)
+    def zsuppanjump(self):
+        self.zsuppan.set_y(self.zsuppan.y - 20)
+
+    def zsuppanback(self):
+        self.zsuppan.set_y(self.zsuppan.y + 20)
+
 
 
     def __init__(self, menu: 'Menustage'):
         super().__init__()
         self.isJumped: bool = False
+        self.isJumpedZsuppan : bool = False
         #screen.blit("background",(0,0))
         self.background: MyActor = MyActor(("background.png"), pos=(0,0), anchor=(0,0))
         self.add_actor(self.background)
@@ -57,11 +68,14 @@ class BlankStage(MyStage):
         self.m: MyActor = MyActor("kancsibase.png", pos=(300, 504), anchor=(0, 0))
         self.add_actor(self.m)
         self.m.set_width(100)
-        self.zsuppan: MyActor = MyActor("zsuppanbase.png", pos=(400, 504), anchor=(0, 0))
+        self.zsuppan: MyActor = MyActor("zsuppanbase.png", pos=(600, 504), anchor=(0, 0))
         self.add_actor(self.zsuppan)
         self.zsuppan.set_width(100)
         self.m2: MyActor = MyActor("rock.png", pos=(0, 550), anchor=(0, 0))
         self.add_actor(self.m2)
+        self.m2.set_height(200)
+        self.m2.set_width(300)
+        self.timer : MyTickTimer = MyTickTimer(func=0, interval=2, startdelay=0, repeat=False)
         self.m2.set_height(25)
         self.m2.set_width(50)
         self.menu = menu
@@ -69,4 +83,3 @@ class BlankStage(MyStage):
         self.set_on_key_down_listener(self.keydown)
         self.set_on_key_up_listener(self.keyup)
         self.m4: MyActor = MyActor("gameover.png", pos=(0, 0), anchor=(0, 0))
-        
