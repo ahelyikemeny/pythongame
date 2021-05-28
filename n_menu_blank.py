@@ -42,6 +42,9 @@ class BlankStage(MyStage):
         if self.m2.x == 1500:
             self.m2.set_x(0)
 
+    def lose(self):
+        if self.m.remove_from_stage():
+            self.add_actor(self.m4)
 
 
     def __init__(self, menu: 'Menustage'):
@@ -65,3 +68,5 @@ class BlankStage(MyStage):
         speedMainCar : float = 0.1
         self.set_on_key_down_listener(self.keydown)
         self.set_on_key_up_listener(self.keyup)
+        self.m4: MyActor = MyActor("gameover.png", pos=(0, 0), anchor=(0, 0))
+        
