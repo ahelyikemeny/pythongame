@@ -31,11 +31,16 @@ class BlankStage(MyStage):
         self.m2.x = self.m2.x + 5
         self.hit()
         print(self.isJumped)
+        self.resetrock()
 
     def hit(self):
         if self.m2.overlaps_with(self.m):
             self.m.remove_from_stage()
             print(self.m)
+
+    def resetrock(self):
+        if self.m2.x == 1500:
+            self.m2.set_x(0)
 
 
 
@@ -52,10 +57,10 @@ class BlankStage(MyStage):
         self.zsuppan: MyActor = MyActor("zsuppanbase.png", pos=(400, 504), anchor=(0, 0))
         self.add_actor(self.zsuppan)
         self.zsuppan.set_width(100)
-        self.m2: MyActor = MyActor("rock.png", pos=(300, 100), anchor=(0, 0))
+        self.m2: MyActor = MyActor("rock.png", pos=(0, 550), anchor=(0, 0))
         self.add_actor(self.m2)
-        self.m2.set_height(200)
-        self.m2.set_width(300)
+        self.m2.set_height(25)
+        self.m2.set_width(50)
         self.menu = menu
         speedMainCar : float = 0.1
         self.set_on_key_down_listener(self.keydown)
