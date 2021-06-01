@@ -2,6 +2,8 @@ from time import *
 from n_mygameworld import *
 from random import Random
 from n_menu_menustage import *
+
+
 class BlankStage(MyStage):
     def back(self, pos, btn):
         self.menu.menu_Main()
@@ -37,6 +39,7 @@ class BlankStage(MyStage):
         self.resetrock()
         self.zsuppanauto()
         self.onrockHit()
+        self.hptext.set_text("HP: " + str(self.hp))
 
 
 
@@ -150,3 +153,5 @@ class BlankStage(MyStage):
         self.m5.set_height(25)
         self.m5.set_width(50)
         music.play("tokyo.mp3")
+        self.add_actor(self.hptext)
+
