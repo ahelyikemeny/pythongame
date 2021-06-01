@@ -37,7 +37,6 @@ class BlankStage(MyStage):
         self.resetrock()
         self.zsuppanauto()
         self.onrockHit()
-        print(self.hp)
 
 
 
@@ -75,9 +74,7 @@ class BlankStage(MyStage):
             self.isJumpedZsuppan = False
 
     def onrockHit(self):
-        print(self.hp)
-        print(self.m.y)
-        print(self.m2.y)
+
         if self.m.is_on_stage():
             if self.m2.is_on_stage():
                 if self.m.y ==   self.m2.y - 50:
@@ -93,6 +90,18 @@ class BlankStage(MyStage):
                 if self.m.y ==   self.m5.y - 50:
                     if self.hp > 0:
                         if self.m.x - 51  == self.m5.x:
+                            self.hp = self.hp - 1
+                            if self.hp == 0:
+                                self.hp = 0
+                                self.lose()
+
+        if self.m.is_on_stage():
+            if self.lorandmadar.is_on_stage():
+                if self.m.y  ==   self.lorandmadar.y:
+                    print("Y jó")
+                    if self.hp > 0:
+                        if self.m.x - 51  == self.lorandmadar.x:
+                            print("X jó")
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
@@ -119,12 +128,12 @@ class BlankStage(MyStage):
         self.add_actor(self.m2)
         self.m2.set_height(200)
         self.m2.set_width(300)
-        self.sun: MyActor = MyActor("unnamed.png", pos=(1366 - 190, 0), anchor=(0, 0))
+        self.sun: MyActor = MyActor("unnamed.png", pos=(1360 - 190, 0), anchor=(0, 0))
         self.lorandmadar: MyActor = MyActor("rock.png", pos=(0, 350), anchor=(0, 0))
         self.add_actor(self.lorandmadar)
         self.lorandmadar.set_height(100)
         self.lorandmadar.set_width(100)
-        self.sun : MyActor = MyActor("unnamed.png", pos=(1366 - 190, 0), anchor=(0,0))
+        self.sun : MyActor = MyActor("unnamed.png", pos=(1360 - 190, 0), anchor=(0,0))
         self.add_actor(self.sun)
         self.cloud: MyActor = MyActor("cloud.png", pos=(-20, 50), anchor=(0, 0))
         self.add_actor(self.cloud)
