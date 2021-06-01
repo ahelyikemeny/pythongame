@@ -31,6 +31,7 @@ class BlankStage(MyStage):
     def update(self, deltaTime: float = 0.0166666666666666666666):
         super().update(deltaTime)
         self.m2.x = self.m2.x + 5
+        self.m5.x = self.m5.x + 3
         self.resetrock()
         self.zsuppanauto()
         self.onrockHit()
@@ -39,11 +40,12 @@ class BlankStage(MyStage):
     def resetrock(self):
         if self.m2.x == 1500:
             self.m2.set_x(0)
+        if self.m5.x == 1500:
+            self.m5.set_x(0)
 
     def lose(self):
             self.m.remove_from_stage()
             self.add_actor(self.m4)
-
 
     def zsuppanauto(self):
         if self.isJumpedZsuppan == False:
@@ -100,3 +102,7 @@ class BlankStage(MyStage):
         self.set_on_key_down_listener(self.keydown)
         self.set_on_key_up_listener(self.keyup)
         self.m4: MyActor = MyActor("gameover.png", pos=(0, 0), anchor=(0, 0))
+        self.m5: MyActor = MyActor("rock.png", pos=(0, 600), anchor=(0, 0))
+        self.add_actor(self.m5)
+        self.m5.set_height(25)
+        self.m5.set_width(50)
