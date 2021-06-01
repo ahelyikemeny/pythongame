@@ -147,7 +147,7 @@ class BlankStage(MyStage):
         speedMainCar: float = 0.1
         self.set_on_key_down_listener(self.keydown)
         self.set_on_key_up_listener(self.keyup)
-        self.m4: MyActor = MyActor("gameover.png", pos=(0, 0), anchor=(0, 0))
+        self.m4: MyActor = MyActor("vege.png", pos=(0, 0), anchor=(0, 0))
         self.m5: MyActor = MyActor("rock.png", pos=(0, 600), anchor=(0, 0))
         self.add_actor(self.m5)
         self.m5.set_height(25)

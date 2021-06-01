@@ -9,7 +9,7 @@ class Menustage(MyStage):
         self.onscreenstage = self
 
     def menu_Creator(self, pos=0, btn=0):
-        self.onscreenstage = GameStage(self)
+        self.onscreenstage = CreatorStage(self)
 
     def menu_Blank(self, pos=0, btn=0):
         self.onscreenstage = BlankStage(self)
