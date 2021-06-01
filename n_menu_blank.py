@@ -36,6 +36,7 @@ class BlankStage(MyStage):
         self.resetrock()
         self.zsuppanauto()
         self.onrockHit()
+        print(self.hp)
 
 
     def resetrock(self):
@@ -57,17 +58,19 @@ class BlankStage(MyStage):
             if self.zsuppan.x - self.m2.x == 50:
                 self.zsuppan.set_y(self.zsuppan.y - 200)
                 self.isJumpedZsuppan = True
-                #print(self.zsuppan.x)
-                #print(self.m2.x)
-                print(self.zsuppan.x - self.m2.x)
         if self.isJumpedZsuppan == True:
-            animate(self.zsuppan, pos=(self.zsuppan.x, self.zsuppan.y + 200), duration=1)
+            animate(self.zsuppan, pos=(self.zsuppan.x, 550), duration=1)
+            self.isJumpedZsuppan = False
+
+        if self.isJumpedZsuppan == False:
+            if self.zsuppan.x - self.m5.x == 51:
+                self.zsuppan.set_y(self.zsuppan.y - 200)
+                self.isJumpedZsuppan = True
+        if self.isJumpedZsuppan == True:
+            animate(self.zsuppan, pos=(self.zsuppan.x, 550), duration=1)
             self.isJumpedZsuppan = False
 
     def onrockHit(self):
-        print(self.hp)
-        print(self.m.y)
-        print(self.m2.y)
         if self.m.is_on_stage():
             if self.m2.is_on_stage():
                 if self.m.y ==   self.m2.y - 50:
@@ -78,10 +81,12 @@ class BlankStage(MyStage):
                                 self.hp = 0
                                 self.lose()
         if self.m.is_on_stage():
+            print(self.m.x - 50)
+            print(self.m5.x)
             if self.m5.is_on_stage():
                 if self.m.y ==   self.m5.y - 50:
                     if self.hp > 0:
-                        if self.m.x - 50  == self.m5.x:
+                        if self.m.x - 51  == self.m5.x:
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
