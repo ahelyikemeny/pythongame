@@ -72,6 +72,15 @@ class BlankStage(MyStage):
                             if self.hp == 0:
                                 self.hp = 0
                                 self.lose()
+        if self.m.is_on_stage():
+            if self.m5.is_on_stage():
+                if self.m.y ==   self.m5.y - 50:
+                    if self.hp > 0:
+                        if self.m.x - 50  == self.m5.x:
+                            self.hp = self.hp - 1
+                            if self.hp == 0:
+                                self.hp = 0
+                                self.lose()
 
 
 
@@ -106,3 +115,4 @@ class BlankStage(MyStage):
         self.add_actor(self.m5)
         self.m5.set_height(25)
         self.m5.set_width(50)
+        music.play("tokyo.mp3")
