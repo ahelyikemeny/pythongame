@@ -33,10 +33,12 @@ class BlankStage(MyStage):
         self.m2.x = self.m2.x + 5
         self.cloud.x = self.cloud.x + 2
         self.m5.x = self.m5.x + 3
+        self.lorandmadar.x = self.lorandmadar.x + 10
         self.resetrock()
         self.zsuppanauto()
         self.onrockHit()
         print(self.hp)
+
 
 
     def resetrock(self):
@@ -44,6 +46,8 @@ class BlankStage(MyStage):
             self.m2.set_x(0)
         if self.m5.x == 1500:
             self.m5.set_x(0)
+        if self.lorandmadar.x == 1500:
+            self.lorandmadar.set_x(0)
 
     def resetcloud(self):
         if self.cloud.x == 1366:
@@ -113,6 +117,10 @@ class BlankStage(MyStage):
         self.add_actor(self.m2)
         self.m2.set_height(200)
         self.m2.set_width(300)
+        self.lorandmadar: MyActor = MyActor("rock.png", pos=(0, 350), anchor=(0, 0))
+        self.add_actor(self.lorandmadar)
+        self.lorandmadar.set_height(100)
+        self.lorandmadar.set_width(100)
         self.sun : MyActor = MyActor("unnamed.png", pos=(1366 - 190, 0), anchor=(0,0))
         self.add_actor(self.sun)
         self.cloud: MyActor = MyActor("cloud.png", pos=(-20, 50), anchor=(0, 0))
