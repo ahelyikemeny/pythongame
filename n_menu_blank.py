@@ -64,17 +64,20 @@ class BlankStage(MyStage):
             if self.zsuppan.x - self.m2.x == 50:
                 self.zsuppan.set_y(self.zsuppan.y - 200)
                 self.isJumpedZsuppan = True
-                # print(self.zsuppan.x)
-                # print(self.m2.x)
-                print(self.zsuppan.x - self.m2.x)
         if self.isJumpedZsuppan == True:
-            animate(self.zsuppan, pos=(self.zsuppan.x, self.zsuppan.y + 200), duration=1)
+            animate(self.zsuppan, pos=(self.zsuppan.x, 550), duration=1)
+            self.isJumpedZsuppan = False
+
+        if self.isJumpedZsuppan == False:
+            if self.zsuppan.x - self.m5.x == 51:
+                self.zsuppan.set_y(self.zsuppan.y - 200)
+                self.isJumpedZsuppan = True
+        if self.isJumpedZsuppan == True:
+            animate(self.zsuppan, pos=(self.zsuppan.x, 550), duration=1)
             self.isJumpedZsuppan = False
 
     def onrockHit(self):
-        print(self.hp)
-        print(self.m.y)
-        print(self.m2.y)
+
         if self.m.is_on_stage():
             if self.m2.is_on_stage():
                 if self.m.y ==   self.m2.y - 50:
@@ -89,7 +92,19 @@ class BlankStage(MyStage):
             if self.m5.is_on_stage():
                 if self.m.y ==   self.m5.y - 50:
                     if self.hp > 0:
-                        if self.m.x - 50  == self.m5.x:
+                        if self.m.x - 51  == self.m5.x:
+                            self.hp = self.hp - 1
+                            if self.hp == 0:
+                                self.hp = 0
+                                self.lose()
+
+        if self.m.is_on_stage():
+            if self.lorandmadar.is_on_stage():
+                if self.m.y  ==   self.lorandmadar.y:
+                    print("Y jó")
+                    if self.hp > 0:
+                        if self.m.x - 51  == self.lorandmadar.x:
+                            print("X jó")
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
@@ -100,13 +115,12 @@ class BlankStage(MyStage):
     def __init__(self, menu: 'Menustage'):
         super().__init__()
         self.isJumped: bool = False
-        self.isJumpedZsuppan: bool = False
-        self.hp: int = 3
-        self.hptext : MyLabel = MyLabel()
-        # screen.blit("background",(0,0))
-        self.background: MyActor = MyActor(("background.png"), pos=(0, 0), anchor=(0, 0))
+        self.isJumpedZsuppan : bool = False
+        self.hp : int = 3
+        #screen.blit("background",(0,0))
+        self.background: MyActor = MyActor(("background.png"), pos=(0,0), anchor=(0,0))
         self.add_actor(self.background)
-        self.background.set_size(1360, 768)
+        self.background.set_size(1360,768)
         self.m: MyActor = MyActor("kancsibase.png", pos=(300, 550), anchor=(0, 0))
         self.add_actor(self.m)
         self.m.set_width(100)
@@ -117,12 +131,12 @@ class BlankStage(MyStage):
         self.add_actor(self.m2)
         self.m2.set_height(200)
         self.m2.set_width(300)
-        self.sun: MyActor = MyActor("unnamed.png", pos=(1366 - 190, 0), anchor=(0, 0))
+        self.sun: MyActor = MyActor("unnamed.png", pos=(1360 - 190, 0), anchor=(0, 0))
         self.lorandmadar: MyActor = MyActor("rock.png", pos=(0, 350), anchor=(0, 0))
         self.add_actor(self.lorandmadar)
         self.lorandmadar.set_height(100)
         self.lorandmadar.set_width(100)
-        self.sun : MyActor = MyActor("unnamed.png", pos=(1366 - 190, 0), anchor=(0,0))
+        self.sun : MyActor = MyActor("unnamed.png", pos=(1360 - 190, 0), anchor=(0,0))
         self.add_actor(self.sun)
         self.cloud: MyActor = MyActor("cloud.png", pos=(-20, 50), anchor=(0, 0))
         self.add_actor(self.cloud)
@@ -138,6 +152,7 @@ class BlankStage(MyStage):
         self.add_actor(self.m5)
         self.m5.set_height(25)
         self.m5.set_width(50)
+        self.hptext : MyLabel = MyLabel()
         music.play("tokyo.mp3")
         self.add_actor(self.hptext)
 
