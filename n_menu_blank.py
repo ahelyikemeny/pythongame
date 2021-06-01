@@ -2,6 +2,8 @@ from time import *
 from n_mygameworld import *
 from random import Random
 from n_menu_menustage import *
+
+
 class BlankStage(MyStage):
     def back(self, pos, btn):
         self.menu.menu_Main()
@@ -17,8 +19,6 @@ class BlankStage(MyStage):
                 self.m.add_timer(timer=self.timer)
                 print(self.m.y)
 
-
-
     def keyup(self, key, mod):
         print("UPP")
         if key == keys.SPACE:
@@ -26,7 +26,6 @@ class BlankStage(MyStage):
                 animate(self.m, pos=(self.m.x, 550), duration=(1))
                 print(self.m.y)
                 self.isJumped = False
-
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
         super().update(deltaTime)
@@ -36,7 +35,6 @@ class BlankStage(MyStage):
         self.resetrock()
         self.zsuppanauto()
         self.onrockHit()
-
 
     def resetrock(self):
         if self.m2.x == 1500:
@@ -49,16 +47,16 @@ class BlankStage(MyStage):
             self.cloud.set_x(0)
 
     def lose(self):
-            self.m.remove_from_stage()
-            self.add_actor(self.m4)
+        self.m.remove_from_stage()
+        self.add_actor(self.m4)
 
     def zsuppanauto(self):
         if self.isJumpedZsuppan == False:
             if self.zsuppan.x - self.m2.x == 50:
                 self.zsuppan.set_y(self.zsuppan.y - 200)
                 self.isJumpedZsuppan = True
-                #print(self.zsuppan.x)
-                #print(self.m2.x)
+                # print(self.zsuppan.x)
+                # print(self.m2.x)
                 print(self.zsuppan.x - self.m2.x)
         if self.isJumpedZsuppan == True:
             animate(self.zsuppan, pos=(self.zsuppan.x, self.zsuppan.y + 200), duration=1)
@@ -70,34 +68,33 @@ class BlankStage(MyStage):
         print(self.m2.y)
         if self.m.is_on_stage():
             if self.m2.is_on_stage():
-                if self.m.y ==   self.m2.y - 50:
+                if self.m.y == self.m2.y - 50:
                     if self.hp > 0:
-                        if self.m.x - 50  == self.m2.x:
+                        if self.m.x - 50 == self.m2.x:
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
+                                music.play_once("uff.mp3")
                                 self.lose()
         if self.m.is_on_stage():
             if self.m5.is_on_stage():
-                if self.m.y ==   self.m5.y - 50:
+                if self.m.y == self.m5.y - 50:
                     if self.hp > 0:
-                        if self.m.x - 50  == self.m5.x:
+                        if self.m.x - 50 == self.m5.x:
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
                                 self.lose()
-
-
 
     def __init__(self, menu: 'Menustage'):
         super().__init__()
         self.isJumped: bool = False
-        self.isJumpedZsuppan : bool = False
-        self.hp : int = 3
-        #screen.blit("background",(0,0))
-        self.background: MyActor = MyActor(("background.png"), pos=(0,0), anchor=(0,0))
+        self.isJumpedZsuppan: bool = False
+        self.hp: int = 3
+        # screen.blit("background",(0,0))
+        self.background: MyActor = MyActor(("background.png"), pos=(0, 0), anchor=(0, 0))
         self.add_actor(self.background)
-        self.background.set_size(1360,768)
+        self.background.set_size(1360, 768)
         self.m: MyActor = MyActor("kancsibase.png", pos=(300, 550), anchor=(0, 0))
         self.add_actor(self.m)
         self.m.set_width(100)
@@ -108,15 +105,15 @@ class BlankStage(MyStage):
         self.add_actor(self.m2)
         self.m2.set_height(200)
         self.m2.set_width(300)
-        self.sun : MyActor = MyActor("unnamed.png", pos=(1366 - 190, 0), anchor=(0,0))
+        self.sun: MyActor = MyActor("unnamed.png", pos=(1366 - 190, 0), anchor=(0, 0))
         self.add_actor(self.sun)
         self.cloud: MyActor = MyActor("cloud.png", pos=(-20, 50), anchor=(0, 0))
         self.add_actor(self.cloud)
-        self.timer : MyTickTimer = MyTickTimer(func=0, interval=2, startdelay=0, repeat=False)
+        self.timer: MyTickTimer = MyTickTimer(func=0, interval=2, startdelay=0, repeat=False)
         self.m2.set_height(25)
         self.m2.set_width(50)
         self.menu = menu
-        speedMainCar : float = 0.1
+        speedMainCar: float = 0.1
         self.set_on_key_down_listener(self.keydown)
         self.set_on_key_up_listener(self.keyup)
         self.m4: MyActor = MyActor("gameover.png", pos=(0, 0), anchor=(0, 0))
@@ -125,3 +122,4 @@ class BlankStage(MyStage):
         self.m5.set_height(25)
         self.m5.set_width(50)
         music.play("tokyo.mp3")
+
