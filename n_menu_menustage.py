@@ -20,18 +20,22 @@ class Menustage(MyStage):
     def __init__(self):
         super().__init__()
 
-        menuitem2: MyActor = MyActor("playb.png", pos=(500, 150), anchor=(0, 0))
-        menuitem2.set_size(414, 150)
+        self.background: MyActor = MyActor(("bg.jpg"), pos=(0, 0), anchor=(0, 0))
+        self.add_actor(self.background)
+        self.background.set_size(1360, 768)
+
+        menuitem2: MyActor = MyActor("playb.png", pos=((1360 - (790/2))/2, 150), anchor=(0, 0))
+        menuitem2.set_size(395, 158)
         self.add_actor(menuitem2)
         menuitem2.set_on_mouse_down_listener(self.menu_Blank)
 
-        menuitem3: MyActor = MyActor("goldc.png", pos=(500, 350), anchor=(0, 0))
-        menuitem3.set_size(414, 150)
+        menuitem3: MyActor = MyActor("goldc.png", pos=((1360 - (803/2))/2, 350), anchor=(0, 0))
+        menuitem3.set_size(401, 155)
         self.add_actor(menuitem3)
         menuitem3.set_on_mouse_down_listener(self.menu_Creator)
 
-        menuitem4: MyActor = MyActor("goldx.png", pos=(500, 550), anchor=(0, 0))
-        menuitem4.set_size(414, 150)
+        menuitem4: MyActor = MyActor("goldx.png", pos=((1360 - (772/2))/2, 550), anchor=(0, 0))
+        menuitem4.set_size(386, 161)
         self.add_actor(menuitem4)
         menuitem4.set_on_mouse_down_listener(self.menu_Exit)
 
