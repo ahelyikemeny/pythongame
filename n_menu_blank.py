@@ -31,6 +31,7 @@ class BlankStage(MyStage):
     def update(self, deltaTime: float = 0.0166666666666666666666):
         super().update(deltaTime)
         self.m2.x = self.m2.x + 5
+        self.cloud.x = self.cloud.x + 2
         self.m5.x = self.m5.x + 3
         self.resetrock()
         self.zsuppanauto()
@@ -42,6 +43,10 @@ class BlankStage(MyStage):
             self.m2.set_x(0)
         if self.m5.x == 1500:
             self.m5.set_x(0)
+
+    def resetcloud(self):
+        if self.cloud.x == 1366:
+            self.cloud.set_x(0)
 
     def lose(self):
             self.m.remove_from_stage()
@@ -103,6 +108,10 @@ class BlankStage(MyStage):
         self.add_actor(self.m2)
         self.m2.set_height(200)
         self.m2.set_width(300)
+        self.sun : MyActor = MyActor("unnamed.png", pos=(1366 - 190, 0), anchor=(0,0))
+        self.add_actor(self.sun)
+        self.cloud: MyActor = MyActor("cloud.png", pos=(-20, 50), anchor=(0, 0))
+        self.add_actor(self.cloud)
         self.timer : MyTickTimer = MyTickTimer(func=0, interval=2, startdelay=0, repeat=False)
         self.m2.set_height(25)
         self.m2.set_width(50)
