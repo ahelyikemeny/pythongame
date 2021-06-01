@@ -152,6 +152,7 @@ class BlankStage(MyStage):
         self.add_actor(self.m5)
         self.m5.set_height(25)
         self.m5.set_width(50)
+        self.hptext : MyLabel = MyLabel()
         music.play("tokyo.mp3")
         self.add_actor(self.hptext)
 
