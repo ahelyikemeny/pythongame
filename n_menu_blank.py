@@ -54,8 +54,8 @@ class BlankStage(MyStage):
             self.cloud.set_x(0)
 
     def lose(self):
-            self.m.remove_from_stage()
-            self.add_actor(self.m4)
+        self.m.remove_from_stage()
+        self.add_actor(self.m4)
 
     def zsuppanauto(self):
         if self.isJumpedZsuppan == False:
@@ -75,6 +75,9 @@ class BlankStage(MyStage):
             self.isJumpedZsuppan = False
 
     def onrockHit(self):
+        print(self.hp)
+        print(self.m.y)
+        print(self.m2.y)
         if self.m.is_on_stage():
             if self.m2.is_on_stage():
                 if self.m.y ==   self.m2.y - 50:
@@ -83,10 +86,9 @@ class BlankStage(MyStage):
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
+                                music.play_once("uff.mp3")
                                 self.lose()
         if self.m.is_on_stage():
-            print(self.m.x - 50)
-            print(self.m5.x)
             if self.m5.is_on_stage():
                 if self.m.y ==   self.m5.y - 50:
                     if self.hp > 0:
@@ -117,6 +119,7 @@ class BlankStage(MyStage):
         self.add_actor(self.m2)
         self.m2.set_height(200)
         self.m2.set_width(300)
+        self.sun: MyActor = MyActor("unnamed.png", pos=(1366 - 190, 0), anchor=(0, 0))
         self.lorandmadar: MyActor = MyActor("rock.png", pos=(0, 350), anchor=(0, 0))
         self.add_actor(self.lorandmadar)
         self.lorandmadar.set_height(100)
@@ -125,11 +128,11 @@ class BlankStage(MyStage):
         self.add_actor(self.sun)
         self.cloud: MyActor = MyActor("cloud.png", pos=(-20, 50), anchor=(0, 0))
         self.add_actor(self.cloud)
-        self.timer : MyTickTimer = MyTickTimer(func=0, interval=2, startdelay=0, repeat=False)
+        self.timer: MyTickTimer = MyTickTimer(func=0, interval=2, startdelay=0, repeat=False)
         self.m2.set_height(25)
         self.m2.set_width(50)
         self.menu = menu
-        speedMainCar : float = 0.1
+        speedMainCar: float = 0.1
         self.set_on_key_down_listener(self.keydown)
         self.set_on_key_up_listener(self.keyup)
         self.m4: MyActor = MyActor("gameover.png", pos=(0, 0), anchor=(0, 0))
