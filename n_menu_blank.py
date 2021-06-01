@@ -39,6 +39,7 @@ class BlankStage(MyStage):
         self.resetrock()
         self.zsuppanauto()
         self.onrockHit()
+        self.hptext.set_text("HP: " + str(self.hp))
 
 
 
@@ -101,6 +102,7 @@ class BlankStage(MyStage):
         self.isJumped: bool = False
         self.isJumpedZsuppan: bool = False
         self.hp: int = 3
+        self.hptext : MyLabel = MyLabel()
         # screen.blit("background",(0,0))
         self.background: MyActor = MyActor(("background.png"), pos=(0, 0), anchor=(0, 0))
         self.add_actor(self.background)
@@ -137,4 +139,5 @@ class BlankStage(MyStage):
         self.m5.set_height(25)
         self.m5.set_width(50)
         music.play("tokyo.mp3")
+        self.add_actor(self.hptext)
 
