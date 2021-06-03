@@ -31,8 +31,11 @@ class BlankStage(MyStage):
 
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
+        print(self.points)
         super().update(deltaTime)
         self.m2.x = self.m2.x + 5
+        if self.hp > 0:
+            self.points = self.points + 1
         self.cloud.x = self.cloud.x + 2
         self.m5.x = self.m5.x + 3
         self.lorandmadar.x = self.lorandmadar.x + 10
@@ -61,6 +64,7 @@ class BlankStage(MyStage):
         self.add_actor(self.m4)
         self.add_actor(self.newGame)
         self.newGame.set_text("Új játék")
+        self.points = self.points
         animate(self.m, pos=(1360, self.m.y), duration=(5))
         animate(self.zsuppan, pos=(1360, self.m.y), duration=(5))
         self.m2.remove_from_stage()
@@ -120,6 +124,7 @@ class BlankStage(MyStage):
         self.isJumped: bool = False
         self.isJumpedZsuppan : bool = False
         self.hp : int = 3
+        self.points : int = 0
         #screen.blit("background",(0,0))
         self.background: MyActor = MyActor(("background.png"), pos=(0,0), anchor=(0,0))
         self.add_actor(self.background)
