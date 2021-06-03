@@ -39,9 +39,7 @@ class BlankStage(MyStage):
         self.resetrock()
         self.zsuppanauto()
         self.onrockHit()
-        self.hptext.set_text("HP: " + str(self.hp))
-
-
+        self.hptext.set_text("Életerő: " + str(self.hp))
 
     def resetrock(self):
         if self.m2.x == 1500:
@@ -56,8 +54,19 @@ class BlankStage(MyStage):
             self.cloud.set_x(0)
 
     def lose(self):
-        self.m.remove_from_stage()
+        music.play_once("uff.mp3")
+        self.zsuppan.set_x(self.m.x)
+        self.add_actor(self.losetext)
+        self.losetext.set_text("Elkapott a Jeti")
         self.add_actor(self.m4)
+        self.add_actor(self.newGame)
+        self.newGame.set_text("Új játék")
+        animate(self.m, pos=(1360, self.m.y), duration=(5))
+        animate(self.zsuppan, pos=(1360, self.m.y), duration=(5))
+        self.m2.remove_from_stage()
+        self.m5.remove_from_stage()
+        self.lorandmadar.remove_from_stage()
+
 
     def zsuppanauto(self):
         if self.isJumpedZsuppan == False:
@@ -77,22 +86,20 @@ class BlankStage(MyStage):
             self.isJumpedZsuppan = False
 
     def onrockHit(self):
-
         if self.m.is_on_stage():
             if self.m2.is_on_stage():
-                if self.m.y ==   self.m2.y - 50:
+                if self.m.y == self.m2.y - 50:
                     if self.hp > 0:
-                        if self.m.x - 50  == self.m2.x:
+                        if self.m.x - 50 == self.m2.x:
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
-                                music.play_once("uff.mp3")
                                 self.lose()
         if self.m.is_on_stage():
             if self.m5.is_on_stage():
-                if self.m.y ==   self.m5.y - 50:
+                if self.m.y == self.m5.y - 50:
                     if self.hp > 0:
-                        if self.m.x - 51  == self.m5.x:
+                        if self.m.x - 51 == self.m5.x:
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
@@ -100,17 +107,13 @@ class BlankStage(MyStage):
 
         if self.m.is_on_stage():
             if self.lorandmadar.is_on_stage():
-                if self.m.y  ==   self.lorandmadar.y:
-                    print("Y jó")
+                if self.m.y == self.lorandmadar.y:
                     if self.hp > 0:
-                        if self.m.x - 51  == self.lorandmadar.x:
-                            print("X jó")
+                        if self.m.x - 51 == self.lorandmadar.x:
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
                                 self.lose()
-
-
 
     def __init__(self, menu: 'Menustage'):
         super().__init__()
@@ -124,7 +127,7 @@ class BlankStage(MyStage):
         self.m: MyActor = MyActor("kancsibase.png", pos=(300, 550), anchor=(0, 0))
         self.add_actor(self.m)
         self.m.set_width(100)
-        self.zsuppan: MyActor = MyActor("zsuppanbase.png", pos=(600, 550), anchor=(0, 0))
+        self.zsuppan: MyActor = MyActor("zsuppanbase2.png", pos=(600, 550), anchor=(0, 0))
         self.add_actor(self.zsuppan)
         self.zsuppan.set_width(100)
         self.m2: MyActor = MyActor("rock.png", pos=(0, 600), anchor=(0, 0))
@@ -147,7 +150,7 @@ class BlankStage(MyStage):
         speedMainCar: float = 0.1
         self.set_on_key_down_listener(self.keydown)
         self.set_on_key_up_listener(self.keyup)
-        self.m4: MyActor = MyActor("vege.png", pos=(0, 0), anchor=(0, 0))
+        self.m4: MyActor = MyActor("vege.png", pos=((1360 - 666)/2, 0), anchor=(0, 0))
         self.m5: MyActor = MyActor("rock.png", pos=(0, 600), anchor=(0, 0))
         self.add_actor(self.m5)
         self.m5.set_height(25)
@@ -155,4 +158,11 @@ class BlankStage(MyStage):
         self.hptext : MyLabel = MyLabel()
         music.play("tokyo.mp3")
         self.add_actor(self.hptext)
+        self.losetext: MyLabel = MyLabel()
+        self.losetext.set_x(768 - 175)
+        self.losetext.set_y(250)
+        self.newGame: MyLabel = MyLabel()
+        self.newGame.set_x(768 - 125)
+        self.newGame.set_y(300)
+
 
