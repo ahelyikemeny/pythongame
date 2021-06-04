@@ -166,8 +166,9 @@ class BlankStage(MyStage):
         self.losetext: MyLabel = MyLabel()
         self.losetext.set_x(768 - 175)
         self.losetext.set_y(250)
-        self.newGame: MyLabel = MyLabel()
+        self.newGame: MyButton = MyButton()
         self.newGame.set_x(768 - 125)
         self.newGame.set_y(300)
+        self.newGame.set_on_mouse_down_listener(self.menu.menu_Main)
 
 
