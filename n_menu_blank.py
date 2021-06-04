@@ -65,6 +65,7 @@ class BlankStage(MyStage):
         self.add_actor(self.newGame)
         self.newGame.set_text("Új játék")
         self.points = self.points
+        self.remove_on_key_down_listener()
         animate(self.m, pos=(1360, self.m.y), duration=(5))
         animate(self.zsuppan, pos=(1360, self.m.y), duration=(5))
         self.m2.remove_from_stage()
