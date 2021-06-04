@@ -38,7 +38,6 @@ class BlankStage(MyStage):
             self.points = self.points + 1
         self.cloud.x = self.cloud.x + 2
         self.m5.x = self.m5.x + 3
-        self.lorandmadar.x = self.lorandmadar.x + 10
         self.resetrock()
         self.zsuppanauto()
         self.onrockHit()
@@ -49,8 +48,6 @@ class BlankStage(MyStage):
             self.m2.set_x(0)
         if self.m5.x == 1500:
             self.m5.set_x(0)
-        if self.lorandmadar.x == 1500:
-            self.lorandmadar.set_x(0)
 
     def resetcloud(self):
         if self.cloud.x == 1366:
@@ -70,7 +67,6 @@ class BlankStage(MyStage):
         animate(self.zsuppan, pos=(1360, self.m.y), duration=(5))
         self.m2.remove_from_stage()
         self.m5.remove_from_stage()
-        self.lorandmadar.remove_from_stage()
 
 
     def zsuppanauto(self):
@@ -110,16 +106,6 @@ class BlankStage(MyStage):
                                 self.hp = 0
                                 self.lose()
 
-        if self.m.is_on_stage():
-            if self.lorandmadar.is_on_stage():
-                if self.m.y == self.lorandmadar.y:
-                    if self.hp > 0:
-                        if self.m.x - 51 == self.lorandmadar.x:
-                            self.hp = self.hp - 1
-                            if self.hp == 0:
-                                self.hp = 0
-                                self.lose()
-
     def __init__(self, menu: 'Menustage'):
         super().__init__()
         self.isJumped: bool = False
@@ -141,10 +127,10 @@ class BlankStage(MyStage):
         self.m2.set_height(200)
         self.m2.set_width(300)
         self.sun: MyActor = MyActor("unnamed.png", pos=(1360 - 190, 0), anchor=(0, 0))
-        self.lorandmadar: MyActor = MyActor("rock.png", pos=(0, 350), anchor=(0, 0))
-        self.add_actor(self.lorandmadar)
-        self.lorandmadar.set_height(100)
-        self.lorandmadar.set_width(100)
+        #self.lorandmadar: MyActor = MyActor("rock.png", pos=(0, 350), anchor=(0, 0))
+        #self.add_actor(self.lorandmadar)
+        #self.lorandmadar.set_height(100)
+        #self.lorandmadar.set_width(100)
         self.sun : MyActor = MyActor("unnamed.png", pos=(1360 - 190, 0), anchor=(0,0))
         self.add_actor(self.sun)
         self.cloud: MyActor = MyActor("cloud.png", pos=(-20, 50), anchor=(0, 0))
