@@ -23,7 +23,8 @@ class CreatorStage(MyStage):
         #self.add_actor(self.m)
         self.menu: CreatorStage = menu
         #self.set_on_mouse_down_listener(self.jerrymove)
-
+        self.menu = menu
         self.kancsi : MyLabel = MyLabel()
         self.kancsi.set_text("kancsi")
         self.add_actor(self.kancsi)
+        self.set_on_key_down_listener(self.keydown)
