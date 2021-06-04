@@ -13,6 +13,8 @@ class BlankStage(MyStage):
         if key == keys.ESCAPE:
             self.menu.menu_Main()
         if key == keys.SPACE:
+            print(self.elapsed_time)
+
             if self.isJumped == False:
                 self.m.y = self.m.y - 200
                 self.isJumped = True
@@ -31,7 +33,7 @@ class BlankStage(MyStage):
 
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
-        print(self.points)
+
         super().update(deltaTime)
         self.m2.x = self.m2.x + 5
         if self.hp > 0:
@@ -42,6 +44,14 @@ class BlankStage(MyStage):
         self.zsuppanauto()
         self.onrockHit()
         self.hptext.set_text("Életerő: " + str(self.hp))
+        if self.isJumped == True:
+            self.ido = self.ido + 1
+            print(self.ido)
+        if self.ido == 200:
+            self.lose1()
+            animate(self.m, pos = (self.m.x, -300), duration=0.6)
+
+
 
     def resetrock(self):
         if self.m2.x == 1500:
@@ -68,6 +78,18 @@ class BlankStage(MyStage):
         self.m2.remove_from_stage()
         self.m5.remove_from_stage()
 
+    def lose1(self):
+        music.play_once("uff.mp3")
+        self.zsuppan.set_x(self.m.x)
+        self.add_actor(self.losetext)
+        self.losetext.set_text("Azt hitted lecsalhatod mi ? ")
+        self.m2.remove_from_stage()
+        self.m5.remove_from_stage()
+        self.zsuppan.remove_from_stage()
+        self.remove_on_key_up_listener()
+        self.remove_on_key_down_listener()
+        self.add_actor(self.newGame)
+        self.newGame.set_text("Új játék")
 
     def zsuppanauto(self):
         if self.isJumpedZsuppan == False:
@@ -108,6 +130,7 @@ class BlankStage(MyStage):
 
     def __init__(self, menu: 'Menustage'):
         super().__init__()
+        self.ido : float = self.elapsed_time
         self.isJumped: bool = False
         self.isJumpedZsuppan : bool = False
         self.hp : int = 3
