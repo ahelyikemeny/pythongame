@@ -1,6 +1,6 @@
 from n_mygameworld import *
 from n_menu_blank import *
-from n_menu_gamestage import *
+from n_menu_creator import *
 #from n_menu_main import scr
 
 class Menustage(MyStage):
@@ -39,10 +39,7 @@ class Menustage(MyStage):
         self.add_actor(menuitem4)
         menuitem4.set_on_mouse_down_listener(self.menu_Exit)
 
-        text1: MyLabel = MyLabel()
-        text1.set_x(140)
-        self.add_actor(text1)
-        self.onscreenstage : MyStage = self
+        self.onscreenstage: MyStage = self
 
     def tikk(self, timer):
         print("TIKK")

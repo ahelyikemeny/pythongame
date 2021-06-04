@@ -33,7 +33,7 @@ class BlankStage(MyStage):
 
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
-
+        print(self.points)
         super().update(deltaTime)
         self.m2.x = self.m2.x + 5
         if self.hp > 0:
@@ -73,6 +73,22 @@ class BlankStage(MyStage):
         self.newGame.set_text("Új játék")
         self.points = self.points
         self.remove_on_key_down_listener()
+        self.add_actor(self.rankText)
+        if self.points <= 350:
+            self.rankText.set_x(550)
+            self.rankText.set_text("Gyenge teljesítmény (" + str(self.points) + ")")
+        if 1000 > self.points > 350:
+            self.rankText.set_x(580)
+            self.rankText.set_text("Ez már valami! (" + str(self.points) + ")")
+        if 1500 > self.points > 1000:
+            self.rankText.set_x(580)
+            self.rankText.set_text("Nem vagy szar! (" + str(self.points) + ")")
+        if 2000 > self.points > 1500:
+            self.rankText.set_x(580)
+            self.rankText.set_text("KI EZ AZ NBER?! (" + str(self.points) + ")")
+        if self.points > 2000:
+            self.rankText.set_x(580)
+            self.rankText.set_text("GODLIKE!!!??!!?!?!?! (" + str(self.points) + ")")
         animate(self.m, pos=(1360, self.m.y), duration=(5))
         animate(self.zsuppan, pos=(1360, self.m.y), duration=(5))
         self.m2.remove_from_stage()
@@ -179,6 +195,13 @@ class BlankStage(MyStage):
         self.newGame: MyButton = MyButton()
         self.newGame.set_x(768 - 125)
         self.newGame.set_y(300)
-        self.newGame.set_on_mouse_down_listener(self.menu.menu_Main)
+        self.newGame.set_on_mouse_down_listener(self.menu.menu_Blank)
+        self.pointsText: MyLabel = MyLabel()
+        self.pointsText.set_x(0)
+        self.pointsText.set_y(50)
+        self.add_actor(self.pointsText)
+
+        self.rankText: MyLabel = MyLabel()
+        self.rankText.set_y(400)
 
 

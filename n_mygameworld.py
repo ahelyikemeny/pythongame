@@ -179,7 +179,7 @@ class MyActor(Actor, MyBaseActor, MyBaseListeners):
 
 
 class MyText(MyBaseActor):
-    text: str = "Ez meg jol johet szo ne torold kixd"
+    text: str = ""
     color = (255, 255, 255)
     alpha: float = 1
     background = None
