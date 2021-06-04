@@ -39,6 +39,8 @@ class Menustage(MyStage):
         self.add_actor(menuitem4)
         menuitem4.set_on_mouse_down_listener(self.menu_Exit)
 
+        self.onscreenstage: MyStage = self
+
     def tikk(self, timer):
         print("TIKK")
 
