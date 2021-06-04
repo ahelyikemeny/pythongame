@@ -1,6 +1,6 @@
 from n_mygameworld import *
 from n_menu_blank import *
-from n_menu_gamestage import *
+from n_menu_creator import *
 #from n_menu_main import scr
 
 class Menustage(MyStage):
