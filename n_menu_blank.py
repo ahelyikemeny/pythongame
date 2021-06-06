@@ -33,7 +33,6 @@ class BlankStage(MyStage):
 
 
     def update(self, deltaTime: float = 0.0166666666666666666666):
-        print(self.points)
         super().update(deltaTime)
         self.m2.x = self.m2.x + 5
         if self.hp > 0:
@@ -46,10 +45,11 @@ class BlankStage(MyStage):
         self.hptext.set_text("Életerő: " + str(self.hp))
         if self.isJumped == True:
             self.ido = self.ido + 1
-            print(self.ido)
         if self.ido == 200:
             self.lose1()
             animate(self.m, pos = (self.m.x, -300), duration=0.6)
+
+        self.pointsText.set_text("Pontok: " + str(self.points))
 
 
 
@@ -73,6 +73,7 @@ class BlankStage(MyStage):
         self.newGame.set_text("Új játék")
         self.points = self.points
         self.remove_on_key_down_listener()
+        self.remove_on_key_up_listener()
         self.add_actor(self.rankText)
         if self.points <= 350:
             self.rankText.set_x(550)
@@ -89,6 +90,10 @@ class BlankStage(MyStage):
         if self.points > 2000:
             self.rankText.set_x(580)
             self.rankText.set_text("GODLIKE!!!??!!?!?!?! (" + str(self.points) + ")")
+        if self.points > 5000:
+            self.rankText.set_x(580)
+            self.rankText.set_text("Légyszíves mondd már el, hogy mivel csalsz mert eskü érdekel. :) (" + str(self.points) + ")")
+
         animate(self.m, pos=(1360, self.m.y), duration=(5))
         animate(self.zsuppan, pos=(1360, self.m.y), duration=(5))
         self.m2.remove_from_stage()
@@ -106,6 +111,7 @@ class BlankStage(MyStage):
         self.remove_on_key_down_listener()
         self.add_actor(self.newGame)
         self.newGame.set_text("Új játék")
+        self.pointsText.remove_from_stage()
 
     def zsuppanauto(self):
         if self.isJumpedZsuppan == False:
@@ -125,11 +131,15 @@ class BlankStage(MyStage):
             self.isJumpedZsuppan = False
 
     def onrockHit(self):
+        print(self.m.x)
+        print(self.m5.x)
         if self.m.is_on_stage():
             if self.m2.is_on_stage():
                 if self.m.y == self.m2.y - 50:
                     if self.hp > 0:
-                        if self.m.x - 50 == self.m2.x:
+                        if -50 < self.m.x - self.m2.x <= 50:
+                            print("jó az elmélet")
+                            self.m2.x = self.m.x + 50
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
@@ -138,7 +148,9 @@ class BlankStage(MyStage):
             if self.m5.is_on_stage():
                 if self.m.y == self.m5.y - 50:
                     if self.hp > 0:
-                        if self.m.x - 51 == self.m5.x:
+                        if -51 < self.m.x - self.m5.x <= 51:
+                            print("jó az elmélet2")
+                            self.m5.x = self.m.x + 51
                             self.hp = self.hp - 1
                             if self.hp == 0:
                                 self.hp = 0
@@ -200,7 +212,6 @@ class BlankStage(MyStage):
         self.pointsText.set_x(0)
         self.pointsText.set_y(50)
         self.add_actor(self.pointsText)
-
         self.rankText: MyLabel = MyLabel()
         self.rankText.set_y(400)
 
