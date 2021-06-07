@@ -226,5 +226,5 @@ class BlankStage(MyStage):
         self.backbutton: MyButton = MyButton()
         self.backbutton.set_x(1100)
         self.backbutton.set_y(700)
-        self.backbutton.set_on_mouse_down_listener(self.menu.menu_Main())
+        self.backbutton.set_on_mouse_down_listener(self.menu.menu_Main)
 
