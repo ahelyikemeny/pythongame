@@ -217,11 +217,10 @@ class BlankStage(MyStage):
         self.add_actor(self.pointsText)
         self.rankText: MyLabel = MyLabel()
         self.rankText.set_y(400)
-        self.gameName : MyLabel = MyLabel()
-        self.gameName.set_text("Villagers Surfers")
+        self.gameName: MyActor = MyActor("jateknev.png", pos=((1360 - (1080/2))/2, -85), anchor=(0, 0))
         self.add_actor(self.gameName)
-        self.gameName.set_x(680 - 210)
-        self.gameName.set_fontsize(75)
+        self.gameName.set_size(540,228)
+
 
         self.backbutton: MyButton = MyButton("vissza.png")
         self.backbutton.set_x(1360 - 195)

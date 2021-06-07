@@ -67,4 +67,12 @@ class CreatorStage(MyStage):
         self.zsuppankep: MyActor = MyActor(("zsuppankep.png"), pos=(1020, 200), anchor=(0, 0))
         self.add_actor(self.zsuppankep)
         self.zsuppankep.set_size(298,427)
+
+
+        self.backbutton2: MyButton = MyButton("vissza.png")
+        self.backbutton2.set_x(1360 - 195)
+        self.backbutton2.set_y(760 - 150)
+        self.backbutton2.set_size(128, 128)
+        self.backbutton2.set_on_mouse_down_listener(self.menu.menu_Main)
+
         self.set_on_key_down_listener(self.keydown)

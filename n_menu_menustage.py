@@ -39,11 +39,9 @@ class Menustage(MyStage):
         self.add_actor(menuitem4)
         menuitem4.set_on_mouse_down_listener(self.menu_Exit)
 
-        self.gameName : MyLabel = MyLabel()
-        self.gameName.set_text("Villagers Surfers")
-        self.add_actor(self.gameName)
-        self.gameName.set_x(680 - 210)
-        self.gameName.set_fontsize(75)
+        menuitem5: MyActor = MyActor("jateknev.png", pos=((1360 - (1400/2))/2, -100), anchor=(0, 0))
+        menuitem5.set_size(720,304)
+        self.add_actor(menuitem5)
 
         self.onscreenstage: MyStage = self
 
