@@ -224,8 +224,8 @@ class BlankStage(MyStage):
         self.gameName.set_fontsize(75)
 
         self.backbutton: MyButton = MyButton("vissza.png")
-        self.backbutton.set_x(1360 - 135)
-        self.backbutton.set_y(760 - 110)
+        self.backbutton.set_x(1360 - 195)
+        self.backbutton.set_y(760 - 120)
         self.backbutton.set_size(128,128)
         self.backbutton.set_on_mouse_down_listener(self.menu.menu_Main)
 
