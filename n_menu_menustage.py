@@ -39,6 +39,12 @@ class Menustage(MyStage):
         self.add_actor(menuitem4)
         menuitem4.set_on_mouse_down_listener(self.menu_Exit)
 
+        self.gameName : MyLabel = MyLabel()
+        self.gameName.set_text("Villagers Surfers")
+        self.add_actor(self.gameName)
+        self.gameName.set_x(680 - 210)
+        self.gameName.set_fontsize(75)
+
         self.onscreenstage: MyStage = self
 
     def tikk(self, timer):

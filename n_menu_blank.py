@@ -12,6 +12,7 @@ class BlankStage(MyStage):
         print(key)
         if key == keys.ESCAPE:
             self.menu.menu_Main()
+            music.pause()
         if key == keys.SPACE:
             print(self.elapsed_time)
 
@@ -70,7 +71,6 @@ class BlankStage(MyStage):
         self.losetext.set_text("Elkapott a Jeti")
         self.add_actor(self.m4)
         self.add_actor(self.newGame)
-        self.newGame.set_text("Új játék")
         self.points = self.points
         self.remove_on_key_down_listener()
         self.remove_on_key_up_listener()
@@ -112,7 +112,6 @@ class BlankStage(MyStage):
         self.remove_on_key_up_listener()
         self.remove_on_key_down_listener()
         self.add_actor(self.newGame)
-        self.newGame.set_text("Új játék")
         self.pointsText.remove_from_stage()
         self.add_actor(self.backbutton)
 
@@ -207,9 +206,10 @@ class BlankStage(MyStage):
         self.losetext: MyLabel = MyLabel()
         self.losetext.set_x(768 - 175)
         self.losetext.set_y(250)
-        self.newGame: MyButton = MyButton()
-        self.newGame.set_x(768 - 125)
-        self.newGame.set_y(300)
+        self.newGame: MyButton = MyButton("newgame.png")
+        self.newGame.set_x(768 - 165)
+        self.newGame.set_y(270)
+        self.newGame.set_size(128,128)
         self.newGame.set_on_mouse_down_listener(self.menu.menu_Blank)
         self.pointsText: MyLabel = MyLabel()
         self.pointsText.set_x(0)
@@ -223,8 +223,9 @@ class BlankStage(MyStage):
         self.gameName.set_x(680 - 210)
         self.gameName.set_fontsize(75)
 
-        self.backbutton: MyButton = MyButton()
-        self.backbutton.set_x(1100)
-        self.backbutton.set_y(700)
+        self.backbutton: MyButton = MyButton("vissza.png")
+        self.backbutton.set_x(1360 - 135)
+        self.backbutton.set_y(760 - 110)
+        self.backbutton.set_size(128,128)
         self.backbutton.set_on_mouse_down_listener(self.menu.menu_Main)
 
