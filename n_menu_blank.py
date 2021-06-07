@@ -93,7 +93,7 @@ class BlankStage(MyStage):
         if self.points > 5000:
             self.rankText.set_x(580)
             self.rankText.set_text("Légyszíves mondd már el, hogy mivel csalsz mert eskü érdekel. :) (" + str(self.points) + ")")
-
+        self.add_actor(self.backbutton)
         animate(self.m, pos=(1360, self.m.y), duration=(5))
         animate(self.zsuppan, pos=(1360, self.m.y), duration=(5))
         self.m2.remove_from_stage()
@@ -112,6 +112,7 @@ class BlankStage(MyStage):
         self.add_actor(self.newGame)
         self.newGame.set_text("Új játék")
         self.pointsText.remove_from_stage()
+        self.add_actor(self.backbutton)
 
     def zsuppanauto(self):
         if self.isJumpedZsuppan == False:
@@ -214,5 +215,8 @@ class BlankStage(MyStage):
         self.add_actor(self.pointsText)
         self.rankText: MyLabel = MyLabel()
         self.rankText.set_y(400)
-
+        self.backbutton: MyButton = MyButton()
+        self.backbutton.set_x(1100)
+        self.backbutton.set_y(700)
+        self.backbutton.set_on_mouse_down_listener(self.menu.menu_Main())
 
