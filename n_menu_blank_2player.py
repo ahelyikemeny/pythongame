@@ -4,7 +4,7 @@ from random import Random
 from n_menu_menustage import *
 
 
-class BlankStage(MyStage):
+class BlankStage2(MyStage):
     def back(self, pos, btn):
         self.menu.menu_Main()
 
@@ -161,7 +161,7 @@ class BlankStage(MyStage):
 
 
 
-    def __init__(self, menu: 'Menustage'):
+    def __init__(self, menu: 'BlankStage2'):
         super().__init__()
         self.ido : float = self.elapsed_time
         self.isJumped: bool = False
@@ -198,8 +198,8 @@ class BlankStage(MyStage):
         speedMainCar: float = 0.1
         self.set_on_key_down_listener(self.keydown)
         self.set_on_key_up_listener(self.keyup)
-        self.set_on_key_down_listener(self.keydown_zsuppan())
-        self.set_on_key_up_listener(self.keyup_zsuppan())
+        self.set_on_key_down_listener(self.keydown_zsuppan)
+        self.set_on_key_up_listener(self.keyup_zsuppan)
         self.m4: MyActor = MyActor("vege.png", pos=((1360 - 666)/2, 0), anchor=(0, 0))
         self.m5: MyActor = MyActor("rock.png", pos=(0, 600), anchor=(0, 0))
         self.add_actor(self.m5)

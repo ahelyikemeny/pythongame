@@ -98,6 +98,8 @@ class BlankStage(MyStage):
         animate(self.zsuppan, pos=(1360, self.m.y), duration=(5))
         self.m2.remove_from_stage()
         self.m5.remove_from_stage()
+        self.cloud.remove_from_stage()
+        self.sun.remove_from_stage()
 
     def lose1(self):
         music.play_once("uff.mp3")
@@ -131,8 +133,6 @@ class BlankStage(MyStage):
             self.isJumpedZsuppan = False
 
     def onrockHit(self):
-        print(self.m.x)
-        print(self.m5.x)
         if self.m.is_on_stage():
             if self.m2.is_on_stage():
                 if self.m.y == self.m2.y - 50:
@@ -214,5 +214,10 @@ class BlankStage(MyStage):
         self.add_actor(self.pointsText)
         self.rankText: MyLabel = MyLabel()
         self.rankText.set_y(400)
+        self.gameName : MyLabel = MyLabel()
+        self.gameName.set_text("Villagers Surfers")
+        self.add_actor(self.gameName)
+        self.gameName.set_x(680 - 210)
+        self.gameName.set_fontsize(75)
 
 
