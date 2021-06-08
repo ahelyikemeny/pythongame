@@ -83,7 +83,7 @@ class BlankStage(MyStage):
             self.rankText.set_text("Ez már valami! (" + str(self.points) + ")")
         if 1500 > self.points > 1000:
             self.rankText.set_x(580)
-            self.rankText.set_text("Nem vagy szar! (" + str(self.points) + ")")
+            self.rankText.set_text("Nem vagy rossz! (" + str(self.points) + ")")
         if 2000 > self.points > 1500:
             self.rankText.set_x(580)
             self.rankText.set_text("KI EZ AZ NBER?! (" + str(self.points) + ")")
