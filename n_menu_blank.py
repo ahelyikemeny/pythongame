@@ -9,27 +9,22 @@ class BlankStage(MyStage):
         self.menu.menu_Main()
 
     def keydown(self, key, mod, unicode):
-        print(key)
         if key == keys.ESCAPE:
             self.menu.menu_Main()
             music.pause()
         if key == keys.SPACE:
-            print(self.elapsed_time)
 
             if self.isJumped == False:
                 self.m.y = self.m.y - 200
                 self.isJumped = True
                 self.m.add_timer(timer=self.timer)
-                print(self.m.y)
 
 
 
     def keyup(self, key, mod):
-        print("UPP")
         if key == keys.SPACE:
             if self.isJumped == True:
                 animate(self.m, pos=(self.m.x, 550), duration=(1))
-                print(self.m.y)
                 self.isJumped = False
 
 
@@ -137,14 +132,11 @@ class BlankStage(MyStage):
             self.isJumpedZsuppan = False
 
     def onrockHit(self):
-        print(self.m.x)
-        print(self.m5.x)
         if self.m.is_on_stage():
             if self.m2.is_on_stage():
                 if self.m.y == self.m2.y - 50:
                     if self.hp > 0:
                         if -50 < self.m.x - self.m2.x <= 50:
-                            print("jó az elmélet")
                             self.m2.x = self.m.x + 50
                             self.hp = self.hp - 1
                             if self.hp == 0:
@@ -155,7 +147,6 @@ class BlankStage(MyStage):
                 if self.m.y == self.m5.y - 50:
                     if self.hp > 0:
                         if -51 < self.m.x - self.m5.x <= 51:
-                            print("jó az elmélet2")
                             self.m5.x = self.m.x + 51
                             self.hp = self.hp - 1
                             if self.hp == 0:
